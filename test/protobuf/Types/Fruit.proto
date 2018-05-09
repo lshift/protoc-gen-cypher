@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package Types;
+
+message Meal {
+    string name = 1;
+    Fruit dessert = 2;
+}
+
+enum Fruit {
+    UNKNOWN = 0;
+    SNOZZBERRY = 1;
+}

@@ -1,0 +1,5 @@
+-r requirements.txt
+
+mypy
+# pytest==3.4.2
+# pytest-cov==2.5.1

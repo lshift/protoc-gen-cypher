@@ -1,6 +1,14 @@
 syntax = "proto3";
 
-package Types;
+package Diner;
+
+service Diner {
+    rpc ChoseFood(Menu) returns (Meal) {}
+}
+
+message Menu {
+    repeated Meal meal = 1;
+}
 
 message Meal {
     string name = 1;

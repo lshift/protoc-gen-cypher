@@ -96,16 +96,12 @@ def generate_nodes(proto_file, options: Options, links) -> OutLines:
             if field_type != '':
                 links.append(('Contains', message_type, f.name, field_type))
 
-
-    # if 'noservices' not in options:
-    #     for s in proto_file.service:
-    #         for m in s.method:
-    #             method_name = f'{proto_file.package}.{s.name}.{m.name}'
-    #             yield(f'[{method_name}] {{color: orange}}')
-    #             yield(m.input_type[1:])
-    #             yield(m.output_type[1:])
-    #             yield(f'[{method_name}] *--1 [{m.input_type[1:]}]')
-    #             yield(f'[{method_name}] 1--* [{m.output_type[1:]}]')
+    for s in proto_file.service:
+        for m in s.method:
+            method_name = f'{s.name}.{m.name}'
+            yield node('Service', proto_file.package, method_name)
+            links.append(('Input', m.input_type[1:], 'input', method_name))
+            links.append(('Output', method_name, 'output', m.output_type[1:]))
 
     for e in proto_file.enum_type:
         yield node('Enum', proto_file.package, e.name)
